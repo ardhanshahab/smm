@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'departement', 'title' => 'PT. SMM (Departement)', 'navName' => 'Data Departement', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'departement', 'title' => 'PT. SMM (Departement)', 'navName' => 'Data Departement', 'activeButton' => 'masterdata'])
 
 @section('content')
     <div class="content">

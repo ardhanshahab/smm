@@ -36,24 +36,24 @@ class DepartementController extends Controller
      * @return RedirectResponse
      */
     public function store(Request $request): RedirectResponse
-{
-    // validate form
-    $this->validate($request, [
-        'nama_departement'     => 'required|min:1',
-        'lokasi_departement'   => 'required|min:1',
-    ]);
+    {
+        try{
+        // validate form
+        $this->validate($request, [
+            'nama_departement'     => 'required|min:1',
+            'lokasi_departement'   => 'required|min:1',
+        ]);
 
-    Departement::create([
-        'nama_departement'     => $request->nama_departement,
-        'lokasi_departement'   => $request->lokasi_departement,
-    ]);
+        Departement::create([
+            'nama_departement'     => $request->nama_departement,
+            'lokasi_departement'   => $request->lokasi_departement,
+        ]);
 
-    // set notification
-    $request->session()->flash('success', 'Data Berhasil Disimpan!');
-
-    // redirect to index
-    return redirect()->route('departement.index');
-}
+            return redirect()->route('departement.index')->with('success', 'Data berhasil disimpan!');
+        } catch (\Exception $e) {
+            return redirect()->route('departement.index')->with('error', 'Terjadi kesalahan saat menyimpan data!');
+        }
+    }
 
 
     /**
@@ -95,6 +95,7 @@ class DepartementController extends Controller
      */
     public function update(Request $request, $id): RedirectResponse
     {
+        try{
         //validate form
         $this->validate($request, [
             'nama_departement'     => 'required|min:1',
@@ -111,8 +112,10 @@ class DepartementController extends Controller
             'lokasi_departement'     => $request->lokasi_departement,
             ]);
 
-        //redirect to index
-        return redirect()->route('departement.index')->with(['success' => 'Data Berhasil Diubah!']);
+            return redirect()->route('departement.index')->with('success', 'Data berhasil diupdate!');
+        } catch (\Exception $e) {
+            return redirect()->route('departement.index')->with('error', 'Terjadi kesalahan saat mengupdate data!');
+        }
     }
 
     /**
@@ -123,13 +126,16 @@ class DepartementController extends Controller
      */
     public function destroy($id): RedirectResponse
     {
+        try{
         //get post by ID
         $post = Departement::findOrFail($id);
 
         //delete post
         $post->delete();
 
-        //redirect to index
-        return redirect()->route('departement.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('departement.index')->with('success', 'Data berhasil dihapus!');
+        } catch (\Exception $e) {
+        return redirect()->route('departement.index')->with('error', 'Terjadi kesalahan saat menghapus data!');
+        }
     }
 }

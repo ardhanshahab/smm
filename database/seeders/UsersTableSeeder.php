@@ -15,16 +15,10 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'Admin',
-            'email' => 'admin@smm.com',
-            'role' => 'admin',
-            'alamat' => 'bandung',
-            'nik' => '12345678900000',
-            'tanggal_lahir' => '2000-12-29',
-            'jenis_kelamin' => 'L',
-            'nohp' => '08123456789',
+            'name' => 'Admin Admin',
+            'email' => 'admin@lightbp.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('admin123'),
+            'password' => Hash::make('secret'),
             'created_at' => now(),
             'updated_at' => now()
         ]);

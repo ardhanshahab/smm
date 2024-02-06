@@ -15,4 +15,9 @@ class Departement extends Model
 
     ];
     public $timestamps = false;
+
+    public function mitra()
+    {
+        return $this->hasOne(Mitra::class, 'id_departement', 'id');
+    }
 }

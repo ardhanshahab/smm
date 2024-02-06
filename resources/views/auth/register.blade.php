@@ -48,24 +48,7 @@
                                     <div class="card card-plain">
                                         <div class="content">
                                             <div class="form-group">
-                                                <input type="text" name="nama" id="nama" class="form-control" placeholder="{{ __('Nama') }}" value="{{ old('nama') }}" required autofocus>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control" placeholder="{{ __('tanggal_lahir') }}" value="{{ old('tanggal_lahir') }}" required autofocus>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <input type="text" name="nohp" id="nohp" class="form-control" placeholder="{{ __('nohp') }}" value="{{ old('nohp') }}" required autofocus>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <select name="role" class="form-control form-select-lg mb-3" id="role" aria-label="role">
-                                                    <option selected>Open this select menu</option>
-                                                    {{-- <option value="1">Super Admin</option> --}}
-                                                    <option value="admin">Admin</option>
-                                                    <option value="customer">Customer</option>
-                                                  </select>
+                                                <input type="text" name="name" id="name" class="form-control" placeholder="{{ __('Name') }}" value="{{ old('name') }}" required autofocus>
                                             </div>
 
                                             <div class="form-group">   {{-- is-invalid make border red --}}

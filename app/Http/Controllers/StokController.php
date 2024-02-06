@@ -24,6 +24,7 @@ class StokController extends Controller
     }
     public function update(Request $request, $id)
 {
+    try{
     // Validasi formulir jika diperlukan
     $request->validate([
         'new_stock' => 'required|numeric|min:0',
@@ -38,8 +39,11 @@ class StokController extends Controller
     $stok->status = $request->new_status;
     $stok->save();
 
-    // Redirect atau kirim respons sesuai kebutuhan Anda
     return redirect()->back()->with('success', 'Stok berhasil diperbarui.');
+} catch (\Exception $e) {
+    return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupdate data!');
+}
+
 }
 
 

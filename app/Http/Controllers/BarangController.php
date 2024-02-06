@@ -38,6 +38,7 @@ class BarangController extends Controller
      */
     public function store(Request $request): RedirectResponse
 {
+    try{
     // Validate form
     $this->validate($request, [
         'nama_barang'   => 'required|min:1',
@@ -58,9 +59,10 @@ class BarangController extends Controller
         'jumlah'          => 10, // Initial stock value
         'status'        => 'Available', // Initial status
     ]);
-
-    // Redirect to index
-    return redirect()->route('barang.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('barang.index')->with('success', 'Data berhasil disimpan!');
+        } catch (\Exception $e) {
+            return redirect()->route('barang.index')->with('error', 'Terjadi kesalahan saat menyimpan data!');
+        }
 }
 
     /**
@@ -102,6 +104,7 @@ class BarangController extends Controller
      */
     public function update(Request $request, $id): RedirectResponse
     {
+        try{
         //validate form
         $this->validate($request, [
             'nama_barang'     => 'required|min:1',
@@ -112,15 +115,6 @@ class BarangController extends Controller
         //get post by ID
         $post = Barang::findOrFail($id);
 
-        //check if image is uploaded
-        // if ($request->hasFile('image')) {
-
-        //     //upload new image
-        //     $image = $request->file('image');
-        //     $image->storeAs('public/posts', $image->hashName());
-
-        //     //delete old image
-        //     Storage::delete('public/posts/'.$post->image);
 
             //update post with new image
             $post->update([
@@ -129,17 +123,10 @@ class BarangController extends Controller
             'kode_barang'   => $request->kode_barang
             ]);
 
-        // } else {
-
-        //     //update post without image
-        //     $post->update([
-        //         'title'     => $request->title,
-        //         'content'   => $request->content
-        //     ]);
-        // }
-
-        //redirect to index
-        return redirect()->route('barang.index')->with(['success' => 'Data Berhasil Diubah!']);
+            return redirect()->route('barang.index')->with('success', 'Data berhasil diupdate!');
+        } catch (\Exception $e) {
+            return redirect()->route('barang.index')->with('error', 'Terjadi kesalahan saat mengupdate data!');
+        }
     }
 
     /**
@@ -150,6 +137,7 @@ class BarangController extends Controller
      */
     public function destroy($id): RedirectResponse
     {
+        try{
         //get post by ID
         $post = Barang::findOrFail($id);
 
@@ -159,34 +147,12 @@ class BarangController extends Controller
         //delete post
         $post->delete();
 
-        //redirect to index
-        return redirect()->route('barang.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('barang.index')->with('success', 'Data berhasil dihapus!');
+        } catch (\Exception $e) {
+        return redirect()->route('barang.index')->with('error', 'Terjadi kesalahan saat menghapus data!');
+    }
     }
 }
 
 
-// public function store(Request $request): RedirectResponse
-//     {
-//         //validate form
-//         $this->validate($request, [
-//             // 'image'     => 'required|image|mimes:jpeg,jpg,png|max:2048',
-//             'nama_barang'     => 'required|min:1',
-//             'jenis_barang'   => 'required|min:1',
-//             'kode_barang'   => 'required|min:1'
-//         ]);
 
-//         //upload image
-//         // $image = $request->file('image');
-//         // $image->storeAs('public/posts', $image->hashName());
-//         // dd($request);
-//         //create post
-//         Barang::create([
-//             // 'image'     => $image->hashName(),
-//             'nama_barang'     => $request->nama_barang,
-//             'jenis_barang'     => $request->jenis_barang,
-//             'kode_barang'   => $request->kode_barang
-//         ]);
-
-//         //redirect to index
-//         return redirect()->route('barang.index')->with(['success' => 'Data Berhasil Disimpan!']);
-//     }

@@ -1,13 +1,19 @@
-<div class="sidebar" data-color="green" data-image="{{ asset('light-bootstrap/img/sidebar-4.jpg') }}">
+<div class="sidebar" data-image="{{ asset('light-bootstrap/img/sidebar-5.jpg') }}">
     <!--
 Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
 Tip 2: you can also add an image using data-image tag
 -->
+    @php
+        $activeButton = "";
+        $navName = "";
+        $activePage = "";
+    @endphp
+
     <div class="sidebar-wrapper">
         <div class="logo">
             <a href="http://www.creative-tim.com" class="simple-text">
-                {{ __("PT. SMM") }}
+                {{ __("Creative Tim") }}
             </a>
         </div>
         <ul class="nav">
@@ -18,47 +24,11 @@ Tip 2: you can also add an image using data-image tag
                 </a>
             </li>
 
-            {{-- /////// --}}
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#masterdata" @if($activeButton =='masterdata') aria-expanded="true" @endif>
-                    <i class="nc-icon nc-single-copy-04"></i>
-                    <p>
-                        {{ __('Master Data') }}
-                        <b class="caret"></b>
-                    </p>
-                </a>
-                <div class="collapse @if($activeButton =='masterdata') show @endif" id="masterdata">
-                    <ul class="nav">
-                        <li class="nav-item @if($activePage == 'barang') active @endif">
-                            <a class="nav-link" href="{{route('barang.index')}}">
-                                <i class="nc-icon nc-tag-content"></i>
-                                <p>{{ __("Barang") }}</p>
-                            </a>
-                        </li>
-                        {{-- @if (auth()->user()->role == "superadmin") --}}
-                            <li class="nav-item @if($activePage == 'departement') active @endif">
-                            <a class="nav-link" href="{{route('departement.index')}}">
-                                <i class="nc-icon nc-istanbul"></i>
-                                <p>{{ __("Departement") }}</p>
-                            </a>
-                            </li>
-
-                            <li class="nav-item @if($activePage == 'lokasi') active @endif">
-                                <a class="nav-link" href="{{route('lokasi.index')}}">
-                                    <i class="nc-icon nc-pin-3"></i>
-                                    <p>{{ __("Lokasi") }}</p>
-                                </a>
-                                </li>
-                        {{-- @endif --}}
-                    </ul>
-                </div>
-            </li>
-            {{-- /////// --}}
-
-            {{-- /////// --}}
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#manajemen" @if($activeButton =='manajemen') aria-expanded="true" @endif>
-                    <i class="nc-icon nc-preferences-circle-rotate"></i>
+                    <i>
+                        <img src="{{ asset('light-bootstrap/img/laravel.svg') }}" style="width:25px">
+                    </i>
                     <p>
                         {{ __('Manajemen') }}
                         <b class="caret"></b>
@@ -68,41 +38,65 @@ Tip 2: you can also add an image using data-image tag
                     <ul class="nav">
                         <li class="nav-item @if($activePage == 'stok') active @endif">
                             <a class="nav-link" href="{{route('stok.index')}}">
-                                <i class="nc-icon nc-bag"></i>
-                                <p>{{ __("Stok") }}</p>
+                                <i class="nc-icon nc-single-02"></i>
+                                <p>{{ __("stok") }}</p>
                             </a>
                         </li>
-                        @if (auth()->user()->role == "superadmin")
-                            <li class="nav-item @if($activePage == 'departement') active @endif">
-                            <a class="nav-link" href="{{route('departement.index')}}">
-                                <i class="nc-icon nc-istanbul"></i>
-                                <p>{{ __("Departement") }}</p>
+                        <li class="nav-item @if($activePage == 'permintaan') active @endif">
+                            <a class="nav-link" href="{{route('permintaan.index')}}">
+                                <i class="nc-icon nc-circle-09"></i>
+                                <p>{{ __("Permintaan") }}</p>
                             </a>
-                            </li>
-
-                            <li class="nav-item @if($activePage == 'lokasi') active @endif">
-                                <a class="nav-link" href="{{route('lokasi.index')}}">
-                                    <i class="nc-icon nc-pin-3"></i>
-                                    <p>{{ __("Lokasi") }}</p>
-                                </a>
-                                </li>
-                        @endif
+                        </li>
+                        <li class="nav-item @if($activePage == 'mitra') active @endif">
+                            <a class="nav-link" href="{{route('mitra.index')}}">
+                                <i class="nc-icon nc-circle-09"></i>
+                                <p>{{ __("Mitra") }}</p>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
-            {{-- /////// --}}
 
             <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#laravelExamples" @if($activeButton =='laravel') aria-expanded="true" @endif>
+                <a class="nav-link" data-toggle="collapse" href="#masterdata" @if($activeButton =='masterdata') aria-expanded="true" @endif>
                     <i>
                         <img src="{{ asset('light-bootstrap/img/laravel.svg') }}" style="width:25px">
                     </i>
                     <p>
-                        {{ __('Laravel example') }}
+                        {{ __('Master Data') }}
                         <b class="caret"></b>
                     </p>
                 </a>
-                <div class="collapse @if($activeButton =='laravel') show @endif" id="laravelExamples">
+                <div class="collapse @if($activeButton =='masterdata') show @endif" id="masterdata">
+                    <ul class="nav">
+                        <li class="nav-item @if($activePage == 'barang') active @endif">
+                            <a class="nav-link" href="{{route('barang.index')}}">
+                                <i class="nc-icon nc-single-02"></i>
+                                <p>{{ __("Barang") }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item @if($activePage == 'departement') active @endif">
+                            <a class="nav-link" href="{{route('departement.index')}}">
+                                <i class="nc-icon nc-circle-09"></i>
+                                <p>{{ __("Departement") }}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#mainuser" @if($activeButton =='mainuser') aria-expanded="true" @endif>
+                    <i>
+                        <img src="{{ asset('light-bootstrap/img/laravel.svg') }}" style="width:25px">
+                    </i>
+                    <p>
+                        {{ __('User') }}
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse @if($activeButton =='mainuser') show @endif" id="mainuser">
                     <ul class="nav">
                         <li class="nav-item @if($activePage == 'user') active @endif">
                             <a class="nav-link" href="{{route('profile.edit')}}">
@@ -110,31 +104,14 @@ Tip 2: you can also add an image using data-image tag
                                 <p>{{ __("User Profile") }}</p>
                             </a>
                         </li>
-                        @if (auth()->user()->role == "superadmin")
-                            <li class="nav-item @if($activePage == 'user-management') active @endif">
+                        <li class="nav-item @if($activePage == 'user-management') active @endif">
                             <a class="nav-link" href="{{route('user.index')}}">
                                 <i class="nc-icon nc-circle-09"></i>
                                 <p>{{ __("User Management") }}</p>
                             </a>
-                            </li>
-                        @endif
+                        </li>
                     </ul>
                 </div>
-            </li>
-
-
-
-            <li class="nav-item @if($activePage == 'table') active @endif">
-                <a class="nav-link" href="{{route('page.index', 'table')}}">
-                    <i class="nc-icon nc-notes"></i>
-                    <p>{{ __("Table List") }}</p>
-                </a>
-            </li>
-            <li class="nav-item @if($activePage == 'typography') active @endif">
-                <a class="nav-link" href="{{route('page.index', 'typography')}}">
-                    <i class="nc-icon nc-paper-2"></i>
-                    <p>{{ __("Typography") }}</p>
-                </a>
             </li>
             <li class="nav-item @if($activePage == 'icons') active @endif">
                 <a class="nav-link" href="{{route('page.index', 'icons')}}">
@@ -142,24 +119,6 @@ Tip 2: you can also add an image using data-image tag
                     <p>{{ __("Icons") }}</p>
                 </a>
             </li>
-            {{-- <li class="nav-item @if($activePage == 'maps') active @endif">
-                <a class="nav-link" href="{{route('page.index', 'maps')}}">
-                    <i class="nc-icon nc-pin-3"></i>
-                    <p>{{ __("Maps") }}</p>
-                </a>
-            </li> --}}
-            <li class="nav-item @if($activePage == 'notifications') active @endif">
-                <a class="nav-link" href="{{route('page.index', 'notifications')}}">
-                    <i class="nc-icon nc-bell-55"></i>
-                    <p>{{ __("Notifications") }}</p>
-                </a>
-            </li>
-            {{-- <li class="nav-item">
-                <a class="nav-link active bg-danger" href="{{route('page.index', 'upgrade')}}">
-                    <i class="nc-icon nc-alien-33"></i>
-                    <p>{{ __("Upgrade to PRO") }}</p>
-                </a>
-            </li> --}}
-        </ul>
+                    </ul>
     </div>
 </div>

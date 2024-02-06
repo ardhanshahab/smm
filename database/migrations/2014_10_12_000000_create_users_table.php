@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('role');
             $table->string('nohp');
-            $table->enum('jenis_kelamin', ['
-            Laki-Laki','Perempuan'])->nullable();;
+            $table->string('jenis_kelamin')->nullable();;
             $table->date('tanggal_lahir')->nullable();
             $table->text('alamat') ->
              nullable();
