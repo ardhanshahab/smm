@@ -10,7 +10,8 @@
                             <h4 class="card-title">{{ __('List Permintaan') }}</h4>
                         </div>
                         <div class="">
-                            <button type="button" class="btn btn-primary mx-1 my-1" data-toggle="modal" data-target="#modalCreate">
+                            <button type="button" class="btn btn-primary mx-1 my-1" data-toggle="modal"
+                                data-target="#modalCreate">
                                 Tambah Permintaan Barang
                             </button>
                             <div class="card-body table-full-width table-responsive">
@@ -67,12 +68,15 @@
                                         <input type="text" class="form-control" name="nama" id="nama" readonly>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="departement" class="col-form-label text-left">Departement:</label>
-                                        <input type="text" class="form-control" name="departement" id="departement" readonly>
+                                        <label for="nama_departement" class="col-form-label text-left">Departement:</label>
+                                        <input type="text" class="form-control" name="nama_departement" id="nama_departement"
+                                            readonly>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="tanggal_permintaan" class="col-form-label text-left">Tanggal Permintaan:</label>
-                                        <input type="date" class="form-control" name="tanggal_permintaan" id="tanggal_permintaan">
+                                        <label for="tanggal_permintaan" class="col-form-label text-left">Tanggal
+                                            Permintaan:</label>
+                                        <input type="date" class="form-control" name="tanggal_permintaan"
+                                            id="tanggal_permintaan">
                                     </div>
                                 </div>
                                 <div class="row p-1 m-1">
@@ -96,25 +100,23 @@
                                                 <tr>
                                                     <td>1</td>
                                                     <td>
-                                                        <!-- Ganti input nama barang dengan select2 -->
-<td>
-    <select class="form-control" name="nama_barang[]">
-        <option value="">Pilih Barang</option>
-        @foreach ($barang as $item)
-            <option value="{{ $item->id }}">{{ $item->nama }}</option>
-        @endforeach
-    </select>
-</td>
-
+                                                        <select class="form-control"  style="width: auto;" name="nama_barang[]">
+                                                            <option value="">Pilih Barang</option>
+                                                            @foreach ($barang as $item)
+                                                                <option value="{{ $item->kode_barang }}">{{ $item->nama_barang }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </td>
-                                                    <td><input type="number" name="jumlah[]" placeholder="Jumlah"></td>
-                                                    <td><input type="number" name="tersedia[]" placeholder="Tersedia"></td>
-                                                    <td><input type="number" name="kuantiti[]" placeholder="kuantiti"></td>
-                                                    <td><input type="number" name="satuan[]" placeholder="satuan"></td>
-                                                    <td><input type="number" name="keterangan[]" placeholder="keterangan"></td>
-                                                    <td><input type="number" name="status[]" placeholder="status"></td>
+                                                    <td><input type="text" class="form-control" name="lokasi[]" id="lokasi_departement" placeholder="Lokasi" readonly></td>
+                                                    <td><input type="number" class="form-control" name="tersedia[]" id="tersedia" style="width: 100px;" placeholder="Tersedia" readonly></td>
+                                                    <td><input type="number"  class="form-control" style="width: 100px;" name="kuantiti[]" placeholder="kuantiti"></td>
+                                                    <td><input type="text"  class="form-control" value="pak" readonly style="width: 100px;" name="satuan[]" placeholder="satuan"></td>
+                                                    <td><input type="text"  class="form-control" style="width: 100px;" name="keterangan[]" value="-" placeholder="keterangan">
+                                                    </td>
+                                                    <td><input type="number"  class="form-control" style="width: 100px;" name="status[]" placeholder="status"></td>
                                                     <td>
-                                                        <button type="button" class="btn btn-danger btn-sm hapus-barang">Hapus</button>
+                                                        <button type="button"
+                                                            class="btn btn-danger btn-sm hapus-barang">Hapus</button>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -130,20 +132,15 @@
             </div>
         </div>
     </div>
-<style>
-    .modal .modal-dialog-xl{
-     min-width: 90%;
-     min-height: 90%;
-     justify-content: center;
-    }
-    div table thead tr th{
-        width: auto;
-        /* overflow-x: scroll; */
-    }
-    .tabel {
-        width: 10px;
-    }
-</style>
+    <style>
+        .modal .modal-dialog-xl {
+            min-width: 90%;
+            min-height: 90%;
+            justify-content: center;
+        }
+
+
+    </style>
 @endsection
 
 @push('js')
@@ -152,9 +149,28 @@
             $('#nik').change(function() {
                 var nik = $(this).val();
                 var mitra = @json($mitras->pluck('user.nama', 'user.nik')->toArray());
-                var departement = @json($mitras->pluck('departement.nama_departement', 'user.nik')->toArray());
+                var nama_departement = @json($mitras->pluck('departement.nama_departement', 'user.nik')->toArray());
+                var lokasi_departement = @json($mitras->pluck('departement.lokasi_departement', 'user.nik')->toArray());
                 $('#nama').val(mitra[nik]);
-                $('#departement').val(departement[nik]);
+                $('#nama_departement').val(nama_departement[nik]);
+                $('#lokasi_departement').val(lokasi_departement[nik]);
+            });
+
+            $('#nama_barang').change(function() {
+                var barangId = $(this).val();
+                var stok = @json($barang);
+
+                // Temukan objek stok yang sesuai dengan barang yang dipilih
+                var selectedStok = stok.find(function(item) {
+                    return item.kode_barang === parseInt(barangId);
+                });
+
+                // Setel nilai data tersedia berdasarkan objek stok yang dipilih
+                if (selectedStok) {
+                    $('#tersedia').val(selectedStok.jumlah);
+                } else {
+                    $('#tersedia').val('');
+                }
             });
 
             var nomorUrut = 1;
@@ -163,13 +179,13 @@
                 nomorUrut++;
                 var row = '<tr>' +
                     '<td>' + nomorUrut + '</td>' +
-                    '<td><input type="text" name="nama_barang[]" placeholder="Nama Barang"></td>' +
-                    '<td><input type="number" name="jumlah[]" placeholder="Jumlah"></td>' +
-                    '<td><input type="number" name="tersedia[]" placeholder="Tersedia"></td>' +
-                    '<td><input type="number" name="kuantiti[]" placeholder="kuantiti"></td>' +
-                    '<td><input type="number" name="satuan[]" placeholder="satuan"></td>' +
-                    '<td><input type="number" name="keterangan[]" placeholder="keterangan"></td>' +
-                    '<td><input type="number" name="status[]" placeholder="status"></td>' +
+                    '<td><select class="form-control" style="width: auto;" name="nama_barang[]" id="nama_barang"><option value="">Pilih Barang</option>@foreach ($barang as $item)<option value="{{ $item->id }}">{{ $item->nama_barang }}</option>@endforeach</select></td>' +
+                    '<td><input type="text" class="form-control" name="lokasi[]" id="lokasi_departement" placeholder="Lokasi" readonly></td>' +
+                    '<td><input type="number" class="form-control" name="tersedia[]" id="tersedia" style="width: 100px;" placeholder="Tersedia" readonly></td>' +
+                    '<td><input type="number" class="form-control" style="width: 100px;" name="kuantiti[]" placeholder="kuantiti"></td>' +
+                    '<td><input type="text" class="form-control" style="width: 100px;" value="pak" readonly name="satuan[]" placeholder="satuan"></td>' +
+                    '<td><input type="text" class="form-control" value="-" style="width: 100px;" name="keterangan[]" placeholder="keterangan"></td>' +
+                    '<td><input type="number" class="form-control" style="width: 100px;" name="status[]" placeholder="status"></td>' +
                     '<td><button type="button" class="btn btn-danger btn-sm hapus-barang">Hapus</button></td>' +
                     '</tr>';
                 $('#barang-container').append(row);
@@ -187,15 +203,15 @@
             });
 
             // Disable NIK input if user is a customer
-            @if(Auth::user()->role === 'customer')
+            @if (Auth::user()->role === 'customer')
                 $('#nik').prop('disabled', true);
             @endif
 
             // Set NIK automatically if user is a customer
-            @if(Auth::user()->role === 'customer')
+            @if (Auth::user()->role === 'customer')
                 $('#nik').val('{{ Auth::user()->nik }}').trigger('change');
             @endif
         });
+
     </script>
 @endpush
-
