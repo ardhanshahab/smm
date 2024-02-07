@@ -6,17 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use App\Models\stok;
 
 class BarangController extends Controller
 {
     public function index()
     {
-        //get posts
+        //get data
         $posts = Barang::paginate(5);
 
-        //render view with posts
+        //menampilkan view blades
         return view('barang.index', compact('posts'));
     }
 
@@ -73,10 +72,10 @@ class BarangController extends Controller
      */
     public function show(string $id)
     {
-        //get post by ID
+        //postID
         $post = Barang::findOrFail($id);
 
-        //render view with post
+        //menampilkan view blade
         return view('posts.show', compact('post'));
     }
 
@@ -88,10 +87,10 @@ class BarangController extends Controller
      */
     public function edit(string $id)
     {
-        //get post by ID
+        //postID
         $post = Barang::findOrFail($id);
 
-        //render view with post
+        //menampilkan view blade
         return view('barang.edit', compact('post'));
     }
 
@@ -105,14 +104,14 @@ class BarangController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         try{
-        //validate form
+        //validasi form
         $this->validate($request, [
             'nama_barang'     => 'required|min:1',
             'jenis_barang'   => 'required|min:1',
             'kode_barang'   => 'required|min:1'
         ]);
 
-        //get post by ID
+        //postID
         $post = Barang::findOrFail($id);
 
 
@@ -138,11 +137,8 @@ class BarangController extends Controller
     public function destroy($id): RedirectResponse
     {
         try{
-        //get post by ID
+        //postID
         $post = Barang::findOrFail($id);
-
-        //delete image
-        // Storage::delete('public/posts/'. $post->image);
 
         //delete post
         $post->delete();

@@ -15,7 +15,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        // Menambahkan satu user admin
         DB::table('users')->insert([
             'name' => 'Admin',
             'email' => 'admin@smm.com',
@@ -45,7 +44,7 @@ class UsersTableSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        // Menambahkan sembilan user customer
+        //memakai for agar lebih efisien
         for ($i = 1; $i <= 9; $i++) {
             DB::table('users')->insert([
                 'name' => 'Customer ' . $i,

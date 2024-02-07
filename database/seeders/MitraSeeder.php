@@ -19,5 +19,14 @@ class MitraSeeder extends Seeder
                 'id_departement' => '1',
             ],
         ]);
+
+        //memakai for agar lebih efisien
+        for ($i = 1; $i <= 10; $i++) {
+            DB::table('mitras')->insert([
+                'id_nik' => '1234567890000' . $i,
+                'id_departement' => $i,
+
+            ]);
+        }
     }
 }

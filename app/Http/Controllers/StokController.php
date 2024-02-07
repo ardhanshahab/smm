@@ -13,13 +13,13 @@ class StokController extends Controller
     //
     public function index()
     {
-        //get posts
+        //get data
         $barang = DB::table('barangs')
         ->join('stoks', 'barangs.kode_barang', '=', 'stoks.id_barang')
         ->select('barangs.*', 'stoks.jumlah', 'stoks.status')
         ->paginate(5);
 
-        //render view with posts
+        //menampilkan view blades
         return view('stock.index', compact('barang'));
     }
     public function update(Request $request, $id)

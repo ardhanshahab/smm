@@ -30,39 +30,60 @@
                                     <!-- Existing form inputs for name and email -->
                                     <div class="form-group{{ $errors->has('nama') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Name') }}</label>
-                                        <input type="text" name="nama" id="input-name" class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('nama', auth()->user()->nama) }}" required autofocus>
+                                        <input type="text" name="nama" id="input-name"
+                                            class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}"
+                                            placeholder="{{ __('Name') }}"
+                                            value="{{ old('nama', auth()->user()->nama) }}" required autofocus>
                                         @include('alerts.feedback', ['field' => 'nama'])
                                     </div>
                                     <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-email">{{ __('Email') }}</label>
-                                        <input type="email" name="email" id="input-email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" value="{{ old('email', auth()->user()->email) }}" required>
+                                        <input type="email" name="email" id="input-email"
+                                            class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                            placeholder="{{ __('Email') }}"
+                                            value="{{ old('email', auth()->user()->email) }}" required>
                                         @include('alerts.feedback', ['field' => 'email'])
                                     </div>
 
                                     <!-- New form inputs -->
                                     <div class="form-group{{ $errors->has('role') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-role">{{ __('Role') }}</label>
-                                        <input type="text" name="role" id="input-role" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" placeholder="{{ __('Role') }}" value="{{ old('role', auth()->user()->role) }}" required>
+                                        <input type="text" name="role" id="input-role"
+                                            class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}"
+                                            placeholder="{{ __('Role') }}"
+                                            value="{{ old('role', auth()->user()->role) }}" required>
                                         @include('alerts.feedback', ['field' => 'role'])
                                     </div>
                                     <div class="form-group{{ $errors->has('nohp') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-no-hp">{{ __('Nomor HP') }}</label>
-                                        <input type="text" name="nohp" id="input-no-hp" class="form-control{{ $errors->has('nohp') ? ' is-invalid' : '' }}" placeholder="{{ __('Nomor HP') }}" value="{{ old('nohp', auth()->user()->nohp) }}" required>
+                                        <input type="text" name="nohp" id="input-no-hp"
+                                            class="form-control{{ $errors->has('nohp') ? ' is-invalid' : '' }}"
+                                            placeholder="{{ __('Nomor HP') }}"
+                                            value="{{ old('nohp', auth()->user()->nohp) }}" required>
                                         @include('alerts.feedback', ['field' => 'nohp'])
                                     </div>
                                     <div class="form-group{{ $errors->has('jenis_kelamin') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-jenis-kelamin">{{ __('Jenis Kelamin') }}</label>
-                                        <input type="text" name="jenis_kelamin" id="input-jenis-kelamin" class="form-control{{ $errors->has('jenis_kelamin') ? ' is-invalid' : '' }}" placeholder="{{ __('Jenis Kelamin') }}" value="{{ old('jenis_kelamin', auth()->user()->jenis_kelamin) }}" required>
+                                        <label class="form-control-label"
+                                            for="input-jenis-kelamin">{{ __('Jenis Kelamin') }}</label>
+                                        <input type="text" name="jenis_kelamin" id="input-jenis-kelamin"
+                                            class="form-control{{ $errors->has('jenis_kelamin') ? ' is-invalid' : '' }}"
+                                            placeholder="{{ __('Jenis Kelamin') }}"
+                                            value="{{ old('jenis_kelamin', auth()->user()->jenis_kelamin) }}" required>
                                         @include('alerts.feedback', ['field' => 'jenis_kelamin'])
                                     </div>
                                     <div class="form-group{{ $errors->has('tanggal_lahir') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-tanggal-lahir">{{ __('Tanggal Lahir') }}</label>
-                                        <input type="date" name="tanggal_lahir" id="input-tanggal-lahir" class="form-control{{ $errors->has('tanggal_lahir') ? ' is-invalid' : '' }}" placeholder="{{ __('Tanggal Lahir') }}" value="{{ old('tanggal_lahir', auth()->user()->tanggal_lahir) }}" required>
+                                        <label class="form-control-label"
+                                            for="input-tanggal-lahir">{{ __('Tanggal Lahir') }}</label>
+                                        <input type="date" name="tanggal_lahir" id="input-tanggal-lahir"
+                                            class="form-control{{ $errors->has('tanggal_lahir') ? ' is-invalid' : '' }}"
+                                            placeholder="{{ __('Tanggal Lahir') }}"
+                                            value="{{ old('tanggal_lahir', auth()->user()->tanggal_lahir) }}" required>
                                         @include('alerts.feedback', ['field' => 'tanggal_lahir'])
                                     </div>
                                     <div class="form-group{{ $errors->has('alamat') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-alamat">{{ __('Alamat') }}</label>
-                                        <textarea name="alamat" id="input-alamat" class="form-control{{ $errors->has('alamat') ? ' is-invalid' : '' }}" placeholder="{{ __('Alamat') }}" required>{{ old('alamat', auth()->user()->alamat) }}</textarea>
+                                        <textarea name="alamat" id="input-alamat" class="form-control{{ $errors->has('alamat') ? ' is-invalid' : '' }}"
+                                            placeholder="{{ __('Alamat') }}" required>{{ old('alamat', auth()->user()->alamat) }}</textarea>
                                         @include('alerts.feedback', ['field' => 'alamat'])
                                     </div>
 
@@ -87,7 +108,9 @@
                                         <label class="form-control-label" for="input-current-password">
                                             <i class="w3-xxlarge fa fa-eye-slash"></i>{{ __('Current Password') }}
                                         </label>
-                                        <input type="password" name="old_password" id="input-current-password" class="form-control{{ $errors->has('old_password') ? ' is-invalid' : '' }}" placeholder="{{ __('Current Password') }}" value="" required>
+                                        <input type="password" name="old_password" id="input-current-password"
+                                            class="form-control{{ $errors->has('old_password') ? ' is-invalid' : '' }}"
+                                            placeholder="{{ __('Current Password') }}" value="" required>
 
                                         @include('alerts.feedback', ['field' => 'old_password'])
                                     </div>
@@ -95,7 +118,9 @@
                                         <label class="form-control-label" for="input-password">
                                             <i class="w3-xxlarge fa fa-eye-slash"></i>{{ __('New Password') }}
                                         </label>
-                                        <input type="password" name="password" id="input-password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('New Password') }}" value="" required>
+                                        <input type="password" name="password" id="input-password"
+                                            class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                            placeholder="{{ __('New Password') }}" value="" required>
 
                                         @include('alerts.feedback', ['field' => 'password'])
                                     </div>
@@ -103,11 +128,14 @@
                                         <label class="form-control-label" for="input-password-confirmation">
                                             <i class="w3-xxlarge fa fa-eye-slash"></i>{{ __('Confirm New Password') }}
                                         </label>
-                                        <input type="password" name="password_confirmation" id="input-password-confirmation" class="form-control" placeholder="{{ __('Confirm New Password') }}" value="" required>
+                                        <input type="password" name="password_confirmation"
+                                            id="input-password-confirmation" class="form-control"
+                                            placeholder="{{ __('Confirm New Password') }}" value="" required>
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-default mt-4">{{ __('Change password') }}</button>
+                                        <button type="submit"
+                                            class="btn btn-default mt-4">{{ __('Change password') }}</button>
                                     </div>
                                 </div>
                             </form>
@@ -117,12 +145,14 @@
                     <div class="col-md-4">
                         <div class="card card-user">
                             <div class="card-image">
-                                <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="...">
+                                <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
+                                    alt="...">
                             </div>
                             <div class="card-body">
                                 <div class="author">
                                     <a href="#">
-                                        <img class="avatar border-gray" src="{{ asset('light-bootstrap/img/faces/face-3.jpg') }}" alt="...">
+                                        <img class="avatar border-gray"
+                                            src="{{ asset('light-bootstrap/img/faces/face-3.jpg') }}" alt="...">
                                         <h5 class="title">{{ auth()->user()->nama }}</h5>
                                     </a>
                                     <p class="description">
@@ -130,7 +160,7 @@
                                     </p>
                                 </div>
                                 <p class="description text-center">
-                                {{ auth()->user()->nik }}
+                                    {{ auth()->user()->nik }}
                                     <br> {{ auth()->user()->nohp }}
                                     <br> {{ auth()->user()->email }}
                                 </p>

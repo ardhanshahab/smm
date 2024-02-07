@@ -63,7 +63,6 @@ class DepartementSeeder extends Seeder
             'nama_departement' => 'Departemen O',
             'lokasi_departement' => 'Semarang',
         ],
-        // Add more records as needed
     ]);
 }
 

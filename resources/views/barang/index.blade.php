@@ -10,7 +10,8 @@
                             <h4 class="card-title">{{ __('Data Barang') }}</h4>
                         </div>
                         <div class="">
-                            <button type="button" class="btn btn-primary mx-1 my-1" data-toggle="modal" data-target="#modalCreate">
+                            <button type="button" class="btn btn-primary mx-1 my-1" data-toggle="modal"
+                                data-target="#modalCreate">
                                 Tambah Barang
                             </button>
                             <div class="card-body table-full-width table-responsive">
@@ -61,11 +62,9 @@
                                                                 aria-label="Close">x</button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <!-- Display data detail here -->
                                                             <p>Nama Barang: {{ $barang->nama_barang }}</p>
                                                             <p>Kode Barang: {{ $barang->kode_barang }}</p>
                                                             <p>Jenis Barang: {{ $barang->jenis_barang }}</p>
-                                                            <!-- Add more fields as needed -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -84,7 +83,6 @@
                                                                 aria-label="Close">x</button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <!-- Include the edit form here with the data pre-filled -->
                                                             @include('barang.edit', ['barang' => $barang])
                                                         </div>
                                                     </div>
@@ -93,7 +91,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-            {{ $posts->links() }}
+                                {{ $posts->links() }}
                             </div>
                         </div>
                     </div>
@@ -122,7 +120,6 @@
 
         </div>
     </div>
-
 @endsection
 
 @push('js')
@@ -133,4 +130,3 @@
         });
     </script>
 @endpush
-

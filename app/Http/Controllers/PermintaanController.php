@@ -24,10 +24,9 @@ class PermintaanController extends Controller
             ->get();
 
             $permintaans = permintaan::with('user.permintaan')->paginate(5);
-            // $permintaans = Permintaan::with('detailPermintaan.barang', 'mitra.user')->paginate(5);
             $detailpermintaans = DetailPermintaan::with('barang', 'permintaan')->get();
-            // return response()->json($detailpermintaans);
-            //render view with posts
+
+            //menampilkan view blades
             return view('permintaan.index', compact('mitras', 'barang', 'permintaans', 'detailpermintaans'));
 
         }

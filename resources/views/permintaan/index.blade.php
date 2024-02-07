@@ -29,7 +29,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- Loop through permintaan data --}}
+
                                         @foreach ($permintaans as $permintaan)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
@@ -37,16 +37,16 @@
                                             <td>{{ $permintaan->departement }}</td>
                                             <td>{{ $permintaan->tanggal_permintaan }}</td>
                                             <td>
-                                                {{-- Loop through detail permintaan --}}
+
                                                 @php
                                                     $totalBarang = 0;
                                                 @endphp
                                                 @foreach ($permintaan->detailPermintaan as $detail)
                                                     {{ $detail->barang->nama_barang }} ({{ $detail->kuantiti }}),
                                                     @php
-                                                        // Tambahkan jumlah kuantiti ke total barang
+
                                                         $totalBarang += $detail->kuantiti;
-                                                        // echo $totalBarang;
+
                                                     @endphp
                                                 @endforeach
                                             </td>
@@ -259,18 +259,17 @@
                 localStorage.setItem('lokasi',lokasi_departement[nik])
             });
 
-            // Event listener untuk perubahan pada semua elemen dengan id yang dimulai dengan 'nama_barang'
             $(document).on('change', '[id^=nama_barang]', function() {
                 var barangId = $(this).val();
                 var stok = @json($barang);
                 console.log(barangId);
 
-                // Temukan objek stok yang sesuai dengan barang yang dipilih
+
                 var selectedStok = stok.find(function(item) {
                     return item.kode_barang === barangId;
                 });
 
-                // Setel nilai data tersedia berdasarkan objek stok yang dipilih
+
                 if (selectedStok) {
                     var nomorUrut = $(this).attr('id').replace('nama_barang', '');
                     console.log('no', nomorUrut);
@@ -320,12 +319,10 @@
                 });
             }
 
-            // Disable NIK input if user is a customer
             @if (Auth::user()->role === 'customer')
                 $('#nik').prop('disabled', true);
             @endif
 
-            // Set NIK automatically if user is a customer
             @if (Auth::user()->role === 'customer')
                 $('#nik').val('{{ Auth::user()->nik }}').trigger('change');
             @endif

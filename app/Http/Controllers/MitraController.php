@@ -13,21 +13,19 @@ class MitraController extends Controller
 {
     public function index()
     {
-        //get posts
+        //get data
         $mitras = Mitra::with(['departement', 'user'])->paginate(5);
-
 
         $users = User::get();
         $departements = Departement::get();
 
-        // dd($mitras);
         return view('mitra.index', compact('mitras', 'users', 'departements'));
     }
 
     public function store(Request $request)
 {
         try{
-        // validate form
+        // validasi form
         $this->validate($request, [
             'id_nik'     => 'required|min:1',
             'id_departement'   => 'required|min:1',

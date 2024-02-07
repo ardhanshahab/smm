@@ -12,10 +12,10 @@ class DepartementController extends Controller
 {
     public function index()
     {
-        //get posts
+        //get data
         $posts = Departement::paginate(5);
 
-        //render view with posts
+        //menampilkan view blades
         return view('departement.index', compact('posts'));
     }
 
@@ -38,7 +38,7 @@ class DepartementController extends Controller
     public function store(Request $request): RedirectResponse
     {
         try{
-        // validate form
+        // validasi form
         $this->validate($request, [
             'nama_departement'     => 'required|min:1',
             'lokasi_departement'   => 'required|min:1',
@@ -64,10 +64,10 @@ class DepartementController extends Controller
      */
     public function show(string $id)
     {
-        //get post by ID
+        //postID
         $post = Departement::findOrFail($id);
 
-        //render view with post
+        //menampilkan view blade
         return view('posts.show', compact('post'));
     }
 
@@ -79,10 +79,10 @@ class DepartementController extends Controller
      */
     public function edit(string $id)
     {
-        //get post by ID
+        //postID
         $post = Departement::findOrFail($id);
 
-        //render view with post
+        //menampilkan view blade
         return view('departement.edit', compact('post'));
     }
 
@@ -96,14 +96,14 @@ class DepartementController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         try{
-        //validate form
+        //validasi form
         $this->validate($request, [
             'nama_departement'     => 'required|min:1',
             'lokasi_departement'   => 'required|min:1',
 
         ]);
 
-        //get post by ID
+        //postID
         $post = Departement::findOrFail($id);
 
             //update post with new image
@@ -127,7 +127,7 @@ class DepartementController extends Controller
     public function destroy($id): RedirectResponse
     {
         try{
-        //get post by ID
+        //postID
         $post = Departement::findOrFail($id);
 
         //delete post

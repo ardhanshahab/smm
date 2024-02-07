@@ -27,7 +27,6 @@
                                                 <td>{{ $departement->id }}</td>
                                                 <td>{{ $departement->nama_departement }}</td>
                                                 <td>{{ $departement->lokasi_departement }}</td>
-                                                {{-- <td>{{ $barang->jenis_barang }}</td> --}}
                                                 <td>
                                                     <button type="button" class="btn btn-info btn-sm mx-1"
                                                         data-toggle="modal"
@@ -60,11 +59,8 @@
                                                                 aria-label="Close">x</button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <!-- Display data detail here -->
                                                             <p>Nama Departement: {{ $departement->nama_departement }}</p>
                                                             <p>Lokasi Departement: {{ $departement->lokasi_departement }}</p>
-                                                            {{-- <p>Jenis Barang: {{ $departement->jenis_barang } }</p> --}}
-                                                            <!-- Add more fields as needed -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -83,7 +79,6 @@
                                                                 aria-label="Close">x</button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <!-- Include the edit form here with the data pre-filled -->
                                                             @include('departement.edit', ['departement' => $departement])
                                                         </div>
                                                     </div>
@@ -128,9 +123,6 @@
 @push('js')
     <script type="text/javascript">
         $(document).ready(function() {
-            // Javascript method's body can be found in assets/js/demos.js
-            // demo.initDashboardPageCharts();
-            // demo.showNotification()
 
         });
     </script>

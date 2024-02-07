@@ -1,6 +1,4 @@
-<!-- create.blade.php -->
-
-<form method="POST" action="{{ route('mitra.store') }}">
+<form method="POST" action="{{ route('user.store') }}">
     @csrf
 
     <div class="mb-3">

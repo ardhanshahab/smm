@@ -1,5 +1,3 @@
-<!-- create.blade.php -->
-
 <form method="POST" action="{{ route('mitra.store') }}">
     @csrf
     <div class="mb-3">
@@ -17,8 +15,9 @@
     <div class="mb-3">
         <label for="id_departement" class="form-label">Departement</label>
         <select class="form-control" name="id_departement" id="id_departement">
-            @foreach($departements as $dep)
-            <option value="{{$dep->id}}">{{$dep->nama_departement}} - {{ $dep->lokasi_departement }}</option>
+            @foreach ($departements as $dep)
+                <option value="{{ $dep->id }}">{{ $dep->nama_departement }} - {{ $dep->lokasi_departement }}
+                </option>
             @endforeach
         </select>
         <div class="invalid-feedback">

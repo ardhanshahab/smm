@@ -2,11 +2,11 @@
 
 @section('content')
     @if (session('success'))
-    @include('alerts.success', ['key' => 'success'])
+        @include('alerts.success', ['key' => 'success'])
     @endif
 
     @if (session('error'))
-    @include('alerts.error', ['key' => 'error'])
+        @include('alerts.error', ['key' => 'error'])
     @endif
 
     <div class="content">
@@ -18,7 +18,8 @@
                             <h4 class="card-title">{{ __('List Mitra') }}</h4>
                         </div>
                         <div class="">
-                            <button type="button" class="btn btn-primary mx-1 my-1" data-toggle="modal" data-target="#modalCreate">
+                            <button type="button" class="btn btn-primary mx-1 my-1" data-toggle="modal"
+                                data-target="#modalCreate">
                                 Tambah User
                             </button>
                             <div class="card-body table-full-width table-responsive">
@@ -34,11 +35,11 @@
                                     <tbody>
                                         @foreach ($users as $stock)
                                             <tr>
-                                                <td>{{$stock->id }}</td>
-                                                <td>{{$stock->nama }}</td>
-                                                <td>{{$stock->role }}</td>
-                                                <td>{{$stock->nohp }}</td>
-                                                <td>{{$stock->email }}</td>
+                                                <td>{{ $stock->id }}</td>
+                                                <td>{{ $stock->nama }}</td>
+                                                <td>{{ $stock->role }}</td>
+                                                <td>{{ $stock->nohp }}</td>
+                                                <td>{{ $stock->email }}</td>
                                                 <td>
                                                     <form action="{{ route('user.destroy', $stock->id) }}" method="POST"
                                                         style="display: inline-block;">
@@ -49,38 +50,38 @@
                                                     </form>
                                                 </td>
                                             </tr>
-                                            </div>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                <div class="d-flex justify-content-center">
-                                    {{ $users->links() }}
-                                </div>
+                            </div>
+                            @endforeach
+                            </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center">
+                                {{ $users->links() }}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        {{-- modalcreate --}}
-        <div class="modal fade" id="modalCreate" tabindex="-1" aria-labelledby="modalCreateLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg justify-content-center align-items-center">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title" id="modalCreateLabel">Tambah Mitra</h1>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">x</button>
-                    </div>
+    </div>
+    {{-- modalcreate --}}
+    <div class="modal fade" id="modalCreate" tabindex="-1" aria-labelledby="modalCreateLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg justify-content-center align-items-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="modalCreateLabel">Tambah Mitra</h1>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">x</button>
+                </div>
 
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                @include('users.create')
-                            </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @include('users.create')
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
     </div>
 @endsection
@@ -88,9 +89,6 @@
 @push('js')
     <script type="text/javascript">
         $(document).ready(function() {
-            // Javascript method's body can be found in assets/js/demos.js
-            // demo.initDashboardPageCharts();
-            // demo.showNotification()
 
         });
     </script>

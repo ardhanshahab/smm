@@ -83,8 +83,8 @@ Tip 2: you can also add an image using data-image tag
                         </ul>
                     </div>
                 </li>
-                @endif
-                @if (auth()->user()->role == 'superadmin' || auth()->user()->role == 'admin')
+            @endif
+            @if (auth()->user()->role == 'superadmin' || auth()->user()->role == 'admin')
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#mainuser"
                         @if ($activeButton == 'mainuser') aria-expanded="true" @endif>
@@ -103,16 +103,16 @@ Tip 2: you can also add an image using data-image tag
                                 </a>
                             </li>
 
-            <li class="nav-item @if ($activePage == 'user-management') active @endif">
-                <a class="nav-link" href="{{ route('user.index') }}">
-                    <i class="nc-icon nc-circle-09"></i>
-                    <p>{{ __('User Management') }}</p>
-                </a>
-            </li>
-        </ul>
+                            <li class="nav-item @if ($activePage == 'user-management') active @endif">
+                                <a class="nav-link" href="{{ route('user.index') }}">
+                                    <i class="nc-icon nc-circle-09"></i>
+                                    <p>{{ __('User Management') }}</p>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-    </li>
-    @endif
-    </ul>
-</div>
+                </li>
+            @endif
+        </ul>
+    </div>
 </div>
