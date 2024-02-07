@@ -5,9 +5,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-
-
-
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">{{ __('List Permintaan') }}</h4>
@@ -147,8 +144,9 @@
                                                             name="nama_barang[]" id="nama_barang1">
                                                             <option value="">Pilih Barang</option>
                                                             @foreach ($barang as $item)
-                                                                <option value="{{ $item->kode_barang }}">
-                                                                    {{ $item->nama_barang }}</option>
+                                                            @if ($item->jumlah != '0')
+                                                                    <option value="{{ $item->kode_barang }}">{{ $item->nama_barang }}</option>
+                                                            @endif
                                                             @endforeach
                                                         </select>
                                                     </td>
@@ -238,7 +236,7 @@
                 var nomorUrut = $('#barang-container tr').length + 1;
                 var row = '<tr>' +
                     '<td>' + nomorUrut + '</td>' +
-                    '<td><select class="form-control" style="width: auto;" name="nama_barang[]" id="nama_barang' + nomorUrut + '"><option value="">Pilih Barang</option>@foreach ($barang as $item)<option value="{{ $item->kode_barang }}">{{ $item->nama_barang }}</option>@endforeach</select></td>' +
+                    '<td><select class="form-control" style="width: auto;" name="nama_barang[]" id="nama_barang' + nomorUrut + '"><option value="">Pilih Barang</option>@foreach ($barang as $item) @if ($item->jumlah != '0')<option value="{{ $item->kode_barang }}">{{ $item->nama_barang }}</option>@endif @endforeach</select></td>' +
                     '<td><input type="text" class="form-control lokasi-input" name="lokasi[]" id="lokasi_departement' + nomorUrut + '" placeholder="Lokasi" readonly></td>' +
                     '<td><input type="number" class="form-control" name="tersedia[]" id="tersedia' + nomorUrut + '" style="width: 100px;" placeholder="Tersedia" readonly></td>' +
                     '<td><input type="number" class="form-control" id="kuantiti' + nomorUrut + '" style="width: 100px;" name="kuantiti[]" placeholder="kuantiti"></td>' +

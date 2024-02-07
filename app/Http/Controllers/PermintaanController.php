@@ -32,40 +32,51 @@ class PermintaanController extends Controller
 
         }
 
-    public function store(Request $request)
-{
-    // Validasi data yang diterima dari formulir
-    $request->validate([
-        'nik' => 'required',
-        'tanggal_permintaan' => 'required|date',
-        'nama_barang.*' => 'required',
-        'kuantiti.*' => 'required|numeric|min:1',
-    ]);
+        public function store(Request $request)
+        {
+            // Validasi data yang diterima dari formulir
+            $request->validate([
+                'nik' => 'required',
+                'tanggal_permintaan' => 'required|date',
+                'nama_barang.*' => 'required',
+                'kuantiti.*' => 'required|numeric|min:1',
+            ]);
 
-    try {
-        // Simpan permintaan barang
-        $permintaan = new Permintaan();
-        $permintaan->nik = $request->nik;
-        $permintaan->tanggal_permintaan = $request->tanggal_permintaan;
-        $permintaan->save();
+            try {
+                DB::beginTransaction();
 
-        // Simpan detail permintaan barang
-        $detailPermintaan = [];
-        foreach ($request->nama_barang as $key => $barang) {
-            $detailPermintaan[] = [
-                'permintaan_id' => $permintaan->id,
-                'nama_barang' => $barang,
-                'kuantiti' => $request->kuantiti[$key],
-                'keterangan' => $request->keterangan[$key] ?? '',
-                'status' => $request->status[$key] ?? '',
-            ];
+                // Simpan permintaan barang
+                $permintaan = new Permintaan();
+                $permintaan->nik = $request->nik;
+                $permintaan->tanggal_permintaan = $request->tanggal_permintaan;
+                $permintaan->save();
+
+                // Simpan detail permintaan barang
+                $detailPermintaan = [];
+                foreach ($request->nama_barang as $key => $barang) {
+                    $detailPermintaan[] = [
+                        'permintaan_id' => $permintaan->id,
+                        'nama_barang' => $barang,
+                        'kuantiti' => $request->kuantiti[$key],
+                        'keterangan' => $request->keterangan[$key] ?? '',
+                        'status' => $request->status[$key] ?? '',
+                    ];
+
+                    // Update stok barang
+                    $barang = stok::where('id_barang', $barang)->first();
+                    $barang->jumlah -= $request->kuantiti[$key];
+                    $barang->save();
+                }
+                DetailPermintaan::insert($detailPermintaan);
+
+                DB::commit();
+
+                return redirect()->route('permintaan.index')->with('success', 'Permintaan barang berhasil disimpan.');
+            } catch (\Exception $e) {
+                DB::rollback();
+                return redirect()->back()->with('error', 'Gagal menyimpan permintaan barang. Silakan coba lagi.');
+            }
         }
-        DetailPermintaan::insert($detailPermintaan);
 
-        return redirect()->route('permintaan.index')->with('success', 'Permintaan barang berhasil disimpan.');
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Gagal menyimpan permintaan barang. Silakan coba lagi.');
-    }
-}
 
 }

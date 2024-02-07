@@ -23,32 +23,34 @@ class StokController extends Controller
         return view('stock.index', compact('barang'));
     }
     public function update(Request $request, $id)
-{
-    try{
-    // Validasi formulir jika diperlukan
-    $request->validate([
-        'new_stock' => 'required|numeric|min:0',
-        'new_status' => 'required|in:Available,Empty',
-    ]);
+    {
+        try {
+            // Validasi formulir jika diperlukan
+            $request->validate([
+                'new_stock' => 'required|numeric|min:0',
+                'new_status' => 'required|in:Available,Empty',
+            ]);
 
-    // Temukan stok berdasarkan kode_barang
-    $stok = Stok::where('id_barang', $id)->firstOrFail();
+            // Temukan stok berdasarkan kode_barang
+            $stok = Stok::where('id_barang', $id)->firstOrFail();
 
-    // Perbarui jumlah stok dan status
-    $stok->jumlah = $request->new_stock;
-    $stok->status = $request->new_status;
-    $stok->save();
+            // Perbarui jumlah stok dan status
+            $stok->jumlah = $request->new_stock;
+            $stok->status = $request->new_status;
 
-    return redirect()->back()->with('success', 'Stok berhasil diperbarui.');
-} catch (\Exception $e) {
-    return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupdate data!');
+            // Jika status baru adalah "Empty", set jumlah stok menjadi 0
+            if ($request->new_status == "Empty") {
+                $stok->jumlah = 0;
+            }
+
+            $stok->save();
+
+            return redirect()->back()->with('success', 'Stok berhasil diperbarui.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupdate data!');
+        }
+    }
+
+
 }
 
-}
-
-
-
-
-
-
-}
