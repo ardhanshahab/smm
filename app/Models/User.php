@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Mitra::class, 'id_nik', 'nik');
     }
+
+    public function permintaan()
+    {
+        return $this->hasOne(permintaan::class, 'nik', 'nik');
+    }
 }
