@@ -18,4 +18,19 @@ class UserController extends Controller
     {
         return view('users.index', ['users' => $model->paginate(15)]);
     }
+
+    public function destroy($id)
+{
+    try {
+        // Mengambil data users berdasarkan ID
+        $users = User::findOrFail($id);
+
+        // Menghapus data users
+        $users->delete();
+
+        return redirect()->route('users.index')->with('success', 'Data berhasil dihapus!');
+    } catch (\Exception $e) {
+        return redirect()->route('users.index')->with('error', 'Terjadi kesalahan saat menghapus data!');
+    }
+}
 }

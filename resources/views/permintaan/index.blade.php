@@ -40,7 +40,6 @@
                                                 {{-- Loop through detail permintaan --}}
                                                 @php
                                                     $totalBarang = 0;
-                                                    $status = "Proses"
                                                 @endphp
                                                 @foreach ($permintaan->detailPermintaan as $detail)
                                                     {{ $detail->barang->nama_barang }} ({{ $detail->kuantiti }}),
@@ -52,9 +51,19 @@
                                                 @endforeach
                                             </td>
                                             <td>{{ $totalBarang }}</td>
-                                            <td>{{ $status }}</td>
                                             <td>
-                                                @if ($status == "Proses")
+                                                @php
+                                                    $statuses = [];
+                                                @endphp
+                                                @foreach ($permintaan->detailPermintaan as $detail)
+                                                    @php
+                                                        $statuses[] = $detail->status;
+                                                    @endphp
+                                                @endforeach
+                                                {{ implode(', ', $statuses) }}
+                                            </td>
+                                            <td>
+                                                @if ($detail->status == "Proses")
                                                     <form action="{{ route('permintaan.destroy', $permintaan->id) }}" method="POST"
                                                     style="display: inline-block;">
                                                     @csrf
@@ -63,6 +72,48 @@
                                                         onclick="return confirm('Anda yakin ingin menghapus?')">Delete</button>
                                                     </form>
                                                 @endif
+
+                                                <td>
+                                                    @if ($detail->status == "Proses" ||$detail->status == "Dikirim" ||$detail->status == "terpenuhi")
+                                                        <button type="button" class="btn btn-primary btn-sm mx-1"
+                                                            data-toggle="modal" data-target="#modalUpdateStatus{{$permintaan->id}}">
+                                                            Update Status
+                                                        </button>
+                                                    @endif
+                                                </td>
+
+                                                <div class="modal fade" id="modalUpdateStatus{{$permintaan->id}}" tabindex="-1" aria-labelledby="modalUpdateStatusLabel{{$permintaan->id}}" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="modalUpdateStatusLabel{{$permintaan->id}}">Update Status Permintaan</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <form action="{{ route('permintaan.update', $permintaan->id) }}" method="POST">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <label for="new_status{{$permintaan->id}}">Status Baru:</label>
+                                                                        <select class="form-control" id="new_status{{$permintaan->id}}" name="new_status">
+                                                                            <option value="Proses">Proses</option>
+                                                                            <option value="Dikirim">Dikirim</option>
+                                                                            <option value="Selesai">Selesai</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
                                             </td>
                                         </tr>
                                         @endforeach

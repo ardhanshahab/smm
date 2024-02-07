@@ -78,5 +78,33 @@ class PermintaanController extends Controller
             }
         }
 
+        public function update(Request $request, $id)
+        {
+            try {
+                // Cari permintaan berdasarkan ID
+                $permintaan = DetailPermintaan::findOrFail($id);
+
+                // Validasi data yang diterima dari formulir
+                $request->validate([
+                    'new_status' => 'required|in:Proses,Dikirim,Selesai',
+                ]);
+
+                // Perbarui status permintaan
+                $permintaan->status = $request->new_status;
+                $permintaan->save();
+
+                // Perbarui status untuk setiap detail permintaan
+                foreach ($permintaan->detailPermintaan as $detail) {
+                    $detail->status = $request->new_status;
+                    $detail->save();
+                }
+
+                return redirect()->back()->with('success', 'Status permintaan berhasil diperbarui.');
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbarui status permintaan.');
+            }
+        }
+
+
 
 }

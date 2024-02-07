@@ -48,8 +48,20 @@
                                     <div class="card card-plain">
                                         <div class="content">
                                             <div class="form-group">
-                                                <input type="text" name="name" id="name" class="form-control" placeholder="{{ __('Name') }}" value="{{ old('name') }}" required autofocus>
+                                                <input type="text" name="nama" id="nama" class="form-control" placeholder="{{ __('nama') }}" value="{{ old('nama') }}" required autofocus>
                                             </div>
+
+                                            <div class="form-group">
+                                                <input type="text" name="nohp" id="nohp" class="form-control" placeholder="{{ __('nohp') }}" value="{{ old('nohp') }}" required autofocus>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <select name="role" id="role" class="form-control" required autofocus>
+                                                    <option value="admin">Admin</option>
+                                                    <option value="customer">Customer</option>
+                                                </select>
+                                            </div>
+
 
                                             <div class="form-group">   {{-- is-invalid make border red --}}
                                                 <input type="email" name="email" value="{{ old('email') }}" placeholder="Enter email" class="form-control" required>
